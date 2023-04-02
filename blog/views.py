@@ -4,9 +4,16 @@ from blog.models import Post
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from blog.forms import CommentForm
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 # Create your views here.
 #def index(request):
     #return render(request, "blog/index.html")
+
+# @cache_page(300)
+# def index(request):
+#     posts = Post.objects.filter(published_at__lte=timezone.now())
+#     return render(request, "blog/index.html", {"posts": posts})
 
 def index(request):
     posts = Post.objects.filter(published_at__lte=timezone.now())
